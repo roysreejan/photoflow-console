@@ -5,7 +5,7 @@ import React, { ChangeEvent, useState } from "react";
 
 interface Props {
   name: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
