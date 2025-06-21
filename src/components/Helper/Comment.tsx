@@ -70,11 +70,13 @@ const Comment = ({ post, user }: Props) => {
               <div className="flex items-center mt-4 justify-between p-4">
                 <div className="flex gap-3 items-center">
                   <Avatar>
-                    <AvatarImage src={user?.profilePicture} />
+                    <AvatarImage src={post?.user?.profilePicture} />
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-semibold text-sm">{user?.username}</p>
+                    <p className="font-semibold text-sm">
+                      {post?.user?.username}
+                    </p>
                   </div>
                 </div>
                 <DotButton user={user} post={post} />
