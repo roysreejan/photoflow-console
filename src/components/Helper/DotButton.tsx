@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Post, User } from "../../../types";
-import { userAgent } from "next/server";
 import { useDispatch } from "react-redux";
 import {
   Dialog,
@@ -15,6 +14,12 @@ import { Ellipsis } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { useFollowUnfollow } from "../hooks/use-auth";
+import axios from "axios";
+import { BASE_API_URL } from "../../../server";
+import { handleAuthRequest } from "../utils/apiRequest";
+import { deletePost } from "../../../store/postSlice";
+import { toast } from "sonner";
+import { redirect } from "next/navigation";
 
 type Props = {
   post: Post | null;
@@ -30,7 +35,22 @@ const DotButton = ({ post, user }: Props) => {
 
   const dispatch = useDispatch();
 
-  const handleDeletePost = async () => {};
+  const handleDeletePost = async () => {
+    const deletePostReq = async () =>
+      await axios.delete(`${BASE_API_URL}/posts/delete-post/${post?._id}`, {
+        withCredentials: true,
+      });
+
+    const result = await handleAuthRequest(deletePostReq);
+
+    if (result?.data.status == "success") {
+      if (post?._id) {
+        dispatch(deletePost(post._id));
+        toast.success(result.data.message);
+        redirect("/");
+      }
+    }
+  };
 
   return (
     <div>
