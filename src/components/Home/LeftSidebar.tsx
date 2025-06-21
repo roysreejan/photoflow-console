@@ -42,6 +42,9 @@ const LeftSidebar = () => {
     if (label === "Logout") {
       handleLogout();
     }
+    if (label === "Profile") {
+      router.push(`/profile/${user?._id}`);
+    }
   };
 
   const SidebarLinks = [

@@ -15,7 +15,7 @@ const RightSidebar = () => {
   const user = useSelector((state: RootState) => state.auth.user);
   const [suggestedUser, setSuggestedUser] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const route = useRouter();
+  const router = useRouter();
 
   console.log("Suggested User", suggestedUser);
 
@@ -69,7 +69,13 @@ const RightSidebar = () => {
       </div>
       {suggestedUser?.slice(0, 5).map((s_user) => {
         return (
-          <div key={s_user._id} className="mt-6 cursor-pointer">
+          <div
+            onClick={() => {
+              router.push(`/profile/${s_user._id}`);
+            }}
+            key={s_user._id}
+            className="mt-6 cursor-pointer"
+          >
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4 cursor-pointer">
                 <Avatar className="w-9 h-9">
