@@ -20,7 +20,7 @@ const PostSlice = createSlice({
       state.posts.unshift(action.payload);
     },
     deletePost: (state, action: PayloadAction<string>) => {
-      state.posts.filter((post) => post._id !== action.payload);
+      state.posts = state.posts.filter((post) => post._id !== action.payload);
     },
     likeOrDislike: (
       state,
