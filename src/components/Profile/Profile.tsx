@@ -96,7 +96,9 @@ const Profile = ({ id }: Props) => {
                 <h1 className="text-2xl font-bold">{userProfile?.username}</h1>
                 {isOwnProfile && (
                   <Link href="/edit-profile">
-                    <Button variant={"secondary"}>Edit Profile</Button>
+                    <Button variant={"secondary"} className="cursor-pointer">
+                      Edit Profile
+                    </Button>
                   </Link>
                 )}
                 {!isOwnProfile && (
