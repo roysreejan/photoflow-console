@@ -9,7 +9,7 @@ import {
   Search,
   SquarePlus,
 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import Image from "next/image";
@@ -18,11 +18,13 @@ import axios from "axios";
 import { BASE_API_URL } from "../../../server";
 import { setAuthUser } from "../../../store/authSlice";
 import { toast } from "sonner";
+import CreatePostModel from "./CreatePostModel";
 
 const LeftSidebar = () => {
   const user = useSelector((state: RootState) => state.auth.user);
   const router = useRouter();
   const dispatch = useDispatch();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleLogout = async () => {
     await axios.post(
@@ -44,6 +46,9 @@ const LeftSidebar = () => {
     }
     if (label === "Profile") {
       router.push(`/profile/${user?._id}`);
+    }
+    if (label === "Create") {
+      setIsDialogOpen(true);
     }
   };
 
@@ -84,6 +89,10 @@ const LeftSidebar = () => {
   ];
   return (
     <div className="h-full">
+      <CreatePostModel
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+      />
       <div className="lg:p-6 p-3 cursor-pointer">
         <div
           onClick={() => {
