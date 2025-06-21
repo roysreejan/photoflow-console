@@ -14,6 +14,7 @@ import {
 import { Ellipsis } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { useFollowUnfollow } from "../hooks/use-auth";
 
 type Props = {
   post: Post | null;
@@ -21,6 +22,7 @@ type Props = {
 };
 
 const DotButton = ({ post, user }: Props) => {
+  const { handleFollowUnfollow } = useFollowUnfollow();
   const isOwnPost = post?.user?._id === user?._id;
   const isFollowing = post?.user?._id
     ? user?.following.includes(post.user._id)
@@ -41,7 +43,17 @@ const DotButton = ({ post, user }: Props) => {
           <div className="space-y-4 flex flex-col w-fit justify-center items-center mx-auto">
             {!isOwnPost && (
               <div>
-                <Button variant={isFollowing ? "destructive" : "secondary"}>
+                <Button
+                  onClick={() => {
+                    if (post?.user?._id) handleFollowUnfollow(post.user._id);
+                  }}
+                  className={`text-white font-semibold ${
+                    isFollowing
+                      ? "bg-red-500 hover:bg-red-600"
+                      : "bg-blue-500 hover:bg-blue-600"
+                  }`}
+                  variant={isFollowing ? "destructive" : "secondary"}
+                >
                   {isFollowing ? "Unfollow" : "Follow"}
                 </Button>
               </div>
