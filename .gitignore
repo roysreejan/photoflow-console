@@ -40,9 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Editor settings
-.vscode/
-.idea/
-
 # Windows system files
 Thumbs.db

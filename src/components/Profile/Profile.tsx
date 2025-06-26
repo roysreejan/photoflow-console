@@ -98,7 +98,10 @@ const Profile = ({ id }: Props) => {
                 <h1 className="text-2xl font-bold">{userProfile?.username}</h1>
                 {isOwnProfile && (
                   <Link href="/edit-profile">
-                    <Button variant={"secondary"} className="cursor-pointer">
+                    <Button
+                      variant={"secondary"}
+                      className="cursor-pointer text-white bg-[#424242]"
+                    >
                       Edit Profile
                     </Button>
                   </Link>
@@ -122,19 +125,19 @@ const Profile = ({ id }: Props) => {
               <div className="flex items-center space-x-8 mt-6 mb-6">
                 <div>
                   <span className="font-bold">{userProfile?.posts.length}</span>
-                  <span> Posts</span>
+                  <span> posts</span>
                 </div>
                 <div>
                   <span className="font-bold">
                     {userProfile?.followers.length}
                   </span>
-                  <span> Followers</span>
+                  <span> followers</span>
                 </div>
                 <div>
                   <span className="font-bold">
                     {userProfile?.following.length}
                   </span>
-                  <span> Following</span>
+                  <span> following</span>
                 </div>
               </div>
               <p className="w-[80%] font-medium">
@@ -153,7 +156,7 @@ const Profile = ({ id }: Props) => {
                 onClick={() => setPostOrSave("POST")}
               >
                 <Grid />
-                <span className="font-semibold">Post</span>
+                <span className="font-semibold">POSTS</span>
               </div>
               <div
                 className={cn(
@@ -163,7 +166,7 @@ const Profile = ({ id }: Props) => {
                 onClick={() => setPostOrSave("SAVE")}
               >
                 <Bookmark />
-                <span className="font-semibold">Save</span>
+                <span className="font-semibold">SAVED</span>
               </div>
             </div>
             {postOrSave === "POST" && <Post userProfile={userProfile} />}
